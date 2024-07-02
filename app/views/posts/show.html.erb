@@ -1,10 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
+<div id="posts" class="text-center">
+  <%= render @post %>
+</div>
 
-<div>
+<div id="links" class="text-center">
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", posts_path %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-primary" %>
 </div>

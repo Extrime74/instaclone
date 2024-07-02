@@ -5,4 +5,6 @@ class Post < ApplicationRecord
   validates :description, length: { maximum: 500 }
   validates :image, presence: true
   has_one_attached :image
+
+  belongs_to :user
 end
