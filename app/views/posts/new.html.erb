@@ -1,4 +1,10 @@
-<h1>New post</h1>
-<div class="row"><%= render "form", post: @post %>
+
+<div id="posts" class="text-center">
+  <%= stylesheet_link_tag("post")%>
+  <div>
+  <p style="color: green"><%= notice %></p>  
+  <div>  
+  <h1>New post</h1>
+  <br>
+  <div class="row"><%= render "form", post: @post %>
 </div>
-<br>

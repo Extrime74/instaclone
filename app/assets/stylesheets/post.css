@@ -1,12 +1,14 @@
- .post-container
- {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    padding: 20px;
-    position: relative;
- }
+.post-container {
+   background-color: #fff;
+   border: 2px solid #ddd;
+   border-radius: 4px;
+   margin: auto;
+   margin-top: 20px;
+   width: 600px;
+   height: auto;
+   position: relative;
+   padding: 20px;
+}
  .post-link
  {
     position: absolute;

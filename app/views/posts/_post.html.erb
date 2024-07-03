@@ -1,16 +1,10 @@
 <div id="<%= dom_id post %>" class="post-container">
   <p>
-    <%= post.title %>
+  <%= post.user.email %>
   </p>
   <%= image_tag(post.image, style: "object-fit: contain; width: 500px; height: 500px;") %>
   <p>
     <%= post.description %>
-  </p>
-  <p>
-    <%= post.keyswords %>
-  </p>
-  <p>
-  <%= post.user.email %>
   </p>
   <p>
   <%= link_to "", post, class:"post-link " %>

@@ -16,24 +16,18 @@
   </div>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, class: "form-control" %>
+  <%= form.label :image %>
+  <%= form.file_field :image %>
   </div>
+
+  <br>
 
   <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :keywords, style: "display: block" %>
-    <%= form.text_field :keyswords, class: "form-control"  %>
-  </div>
-
-  <div>
-  <%= form.label :image %>
-  <%= form.file_field :image %>
-  </div>
+  <br>
 
   <div>
     <%= form.submit class: "btn btn-primary col-12" %>

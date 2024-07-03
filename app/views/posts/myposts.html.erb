@@ -1,14 +1,13 @@
-<%= stylesheet_link_tag("post")%>
-<p style="color: green"><%= notice %></p>
-
 <div id="posts" class="text-center">
+  <%= stylesheet_link_tag("post")%>
+  <div>
+  <p style="color: green"><%= notice %></p>  
+  <div>  
+  <h1>My posts</h1>
+  <br>
   <% @posts.each do |post| %>
     <% if post.user.id == current_user.id%>
         <%= render post %>
     <% end %>
-  <% end %>
-</div>
-
-<div id="buttons" class="text-center">
-  <%= link_to "New post", new_post_path, class: "btn btn-primary" %>
+  <% end %> 
 </div>
