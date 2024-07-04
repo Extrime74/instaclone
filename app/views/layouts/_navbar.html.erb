@@ -20,6 +20,9 @@
           <%= link_to "My Posts", posts_myposts_path, class: "nav-link"%>
         </li> 
         <li class="nav-item">
+          <%= link_to "My Profile", current_user, class: "nav-link"%>
+        </li> 
+        <li class="nav-item">
           <button class="button-like-link" onclick="window.location.href='<%= destroy_user_session_path %>'">Sign Out</button>
         </li> 
       <% else %>

@@ -1,6 +1,6 @@
 <div id="<%= dom_id post %>" class="post-container">
   <p>
-  <%= post.user.email %>
+  <%= link_to post.user.email, post.user %>
   </p>
   <%= image_tag(post.image, style: "object-fit: contain; width: 500px; height: 500px;") %>
   <p>
