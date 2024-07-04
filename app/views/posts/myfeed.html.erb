@@ -1,0 +1,15 @@
+<div id="posts" class="text-center">
+  <%= stylesheet_link_tag("post")%>
+  <div>
+  <p style="color: green"><%= notice %></p>  
+  <div>  
+  <h1>My feed</h1>
+  <br>
+  <% @posts.each do |post| %>
+    <% if user_signed_in? %>
+      <% if current_user.following?(post.user) %>
+        <%= render post %>
+    <% end %>
+  <% end %> 
+<% end %> 
+</div>

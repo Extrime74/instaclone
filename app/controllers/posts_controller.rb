@@ -19,6 +19,10 @@ class PostsController < ApplicationController
     @posts = Post.all.order(created_at: :desc)
   end
 
+  def myfeed
+    @posts = Post.all.order(created_at: :desc)
+  end
+
   # GET /posts/new
   def new
     @post = Post.new
