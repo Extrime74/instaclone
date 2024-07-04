@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :like do
+    user { nil }
+    post { nil }
+  end
+
   factory :comment do
     text { "MyString" }
     user_id { "MyString" }

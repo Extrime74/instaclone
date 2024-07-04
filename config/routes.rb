@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :likes, only: [:create, :destroy]
   resources :comments
+  
   devise_scope :user do
     get '/users', to: 'devise/registrations#new'
     get '/users/sign_out' => 'devise/sessions#destroy'
