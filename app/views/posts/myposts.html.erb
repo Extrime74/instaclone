@@ -3,7 +3,7 @@
   <div>
   <p style="color: green"><%= notice %></p>  
   <div>  
-  <h1>My posts</h1>
+  <h1>My Posts</h1>
   <br>
   <% @posts.each do |post| %>
     <% if post.user.id == current_user.id%>

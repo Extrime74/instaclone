@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   def create
     @like = current_user.likes.new(like_params)
-    if !@like.save
-      flash[:alert] = "You already liked this post"
-    end
+    flash[:alert] = 'You already liked this post' unless @like.save
     redirect_to root_path
   end
 

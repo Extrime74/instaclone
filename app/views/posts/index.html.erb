@@ -1,11 +1,12 @@
 <%= stylesheet_link_tag("post")%>
 <div id="posts" class="text-left" style="margin-left: 20px;">
-
+  <% if user_signed_in? %>
     <% current_user.follow_requests.each do |request| %>
         <%= request.followerable.email %> Wants to follow you
         <%= button_to "Accept", accept_path(request.followerable) %>
         <%= button_to "Decline", decline_path(request.followerable) %>
     <% end %>
+
     <br>
     <h5>Followers</h5>
     <% current_user.followers.each do |follower| %>
@@ -16,6 +17,7 @@
     <% current_user.following.each do |following| %>
         <p><%= link_to following.email, following %></p>
     <% end %>
+  <% end %>
 <div id="posts" class="text-center">
   <%= stylesheet_link_tag("post")%>
   <br>

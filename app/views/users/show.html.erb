@@ -1,6 +1,10 @@
-<div id="posts" class="text-left" style="margin-left: 20px;">
-    <h2><%= @user.email %></h2>
-
+<div id="posts" class="text-center">
+    <%= stylesheet_link_tag("post")%>
+    <div>
+    <p style="color: green"><%= notice %></p>  
+    <div>  
+    <br>
+    <h3><%= @user.email %></h3>
     <% if @user.email != current_user.email %>
         <% if current_user.following?(@user) %>
             <%= button_to "Unfollow", unfollow_path(@user) %>

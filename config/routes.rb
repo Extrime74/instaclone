@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :likes, only: [:create, :destroy]
+  resources :likes, only: %i[create destroy]
   resources :comments
 
   devise_for :users
@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  
-  post 'users/:id/follow', to: "users#follow", as: "follow"
-  post 'users/:id/unfollow', to: "users#unfollow", as: "unfollow"
-  post 'users/:id/accept', to: "users#accept", as: "accept"
-  post 'users/:id/decline', to: "users#decline", as: "decline"
-  post 'users/:id/cancel', to: "users#cancel", as: "cancel"
 
-  get 'posts/myfeed'
+  post 'users/:id/follow', to: 'users#follow', as: 'follow'
+  post 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
+  post 'users/:id/accept', to: 'users#accept', as: 'accept'
+  post 'users/:id/decline', to: 'users#decline', as: 'decline'
+  post 'users/:id/cancel', to: 'users#cancel', as: 'cancel'
+
+  
+  get 'posts/feed'
   get 'posts/myposts'
   resources :posts
 

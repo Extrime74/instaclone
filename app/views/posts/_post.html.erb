@@ -6,11 +6,17 @@
   </p>
   <%= image_tag(post.image, style: "object-fit: contain; width: 500px; height: 500px;") %>
   <p>
-  <%#= link_to "", post, class:"post-link" %>
+  <%= link_to "", post, class:"post-link" %>
   </p>
-  <div style="display: flex; justify-content: flex-start; align-items: center;">
-    <div style="align-items: left;">
+  <p>
+  <div style="text-align: left; margin-left: 30px;">
+    <%= post.description %>
+  </div>
+  </p>
+</div>
+<div style="align-items: center;">
       <% if user_signed_in? %>
+        <%= post.likes.count %>
         <% like = current_user.likes.find_by(post: post) %>
         <% if like.nil? %>
           <%= button_to "Like", likes_path, params: { like: { post_id: post.id}}, method: :post%>
@@ -18,12 +24,4 @@
           <%= button_to "Unlike", like_path(like), method: :delete %>
         <% end %>
       <% end %>
-    </div>
-    <p style="margin-left: 10px; margin-bottom: 10px;"> <%= post.likes.count %> Likes </p>
-  </div>
-  <p>
-  <div style="text-align: left; margin-left: 30px;">
-    <%= post.description %>
-  </div>
-  </p>
 </div>

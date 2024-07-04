@@ -8,7 +8,7 @@ class User < ApplicationRecord
   followability
 
   has_many :posts
-  has_many :comments 
+  has_many :comments
   has_many :likes
 
   def unfollow(user)
