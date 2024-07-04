@@ -45,6 +45,8 @@ gem 'bootsnap', require: false
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
 
+gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
