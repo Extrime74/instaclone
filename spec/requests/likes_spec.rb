@@ -1,25 +1,41 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Likes", type: :request do
-  describe "GET /create" do
-    it "returns http success" do
-      get "/likes/create"
-      expect(response).to have_http_status(:success)
+RSpec.describe 'Likes', type: :request do
+  let(:user) { FactoryBot.create(:user) }
+  let(:post) { create(:post, user:) }
+
+  before do
+    sign_in(user)
+  end
+
+  describe 'POST create' do
+    it 'should create a like for the post' do
+      create(:like, user:, post:)
+      expect do
+        post posts_path, params: { like: { post_id: post.id } }
+      end.to change(Like, :count).by(1)
+    end
+
+    it 'should not create a like if the user already liked the post' do
+      create(:like, user:, post:)
+
+      expect do
+        post likes_path, params: { like: { post_id: post.id } }
+      end.to_not change(Like, :count)
     end
   end
 
-  describe "GET /destroy" do
-    it "returns http success" do
-      get "/likes/destroy"
-      expect(response).to have_http_status(:success)
+  describe 'DELETE destroy' do
+    it 'should remove the like' do
+      like = create(:like, user:, post:)
+
+      expect do
+        delete like_path(like)
+      end.to change(Like, :count).by(-1)
+
+      expect(response).to redirect_to(root_path)
     end
   end
-
-  describe "GET /like_params" do
-    it "returns http success" do
-      get "/likes/like_params"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end
