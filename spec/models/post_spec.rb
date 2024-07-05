@@ -15,7 +15,7 @@ RSpec.describe Post, type: :model do
   end
 
   it 'is invalid without an image' do
-    post = Post.new(title: Faker::Lorem.sentence, description: Faker::Lorem.characters(number: 500))
+    post = Post.new(description: Faker::Lorem.characters(number: 500))
     expect(post).to be_invalid
   end
 

@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   post 'users/:id/decline', to: 'users#decline', as: 'decline'
   post 'users/:id/cancel', to: 'users#cancel', as: 'cancel'
 
-  
   get 'posts/feed'
   get 'posts/myposts'
   resources :posts
