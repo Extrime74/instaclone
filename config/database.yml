@@ -21,13 +21,21 @@ default: &default
 
 development:
   <<: *default
+<<<<<<< HEAD
   database: instaclone_development
+=======
+  database: dbp_development
+>>>>>>> dd1e69c1342c458fb3b3431fefb96feb988e1372
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
+<<<<<<< HEAD
   #username: instaclone
+=======
+  #username: dbp
+>>>>>>> dd1e69c1342c458fb3b3431fefb96feb988e1372
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -55,7 +63,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+<<<<<<< HEAD
   database: instaclone_test
+=======
+  database: dbp_test
+>>>>>>> dd1e69c1342c458fb3b3431fefb96feb988e1372
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +91,11 @@ test:
 #
 production:
   <<: *default
+<<<<<<< HEAD
   database: instaclone_production
   username: instaclone
+=======
+  database: dbp_production
+  username: dbp
+>>>>>>> dd1e69c1342c458fb3b3431fefb96feb988e1372
   password: <%= ENV["DBP_DATABASE_PASSWORD"] %>
