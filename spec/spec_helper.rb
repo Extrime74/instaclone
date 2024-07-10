@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'faker'
+require 'factory_bot'
 
 SimpleCov.start do
   add_group 'Controllers', 'app/controllers'
