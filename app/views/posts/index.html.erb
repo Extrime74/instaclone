@@ -1,64 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-</head>
+<%= stylesheet_link_tag("post")%>
+<div id="posts" class="text-left" style="margin-left: 20px;">
+  <% if user_signed_in? %>
+    <% current_user.follow_requests.each do |request| %>
+        <%= request.followerable.email %> Wants to follow you
+        <%= button_to "Accept", accept_path(request.followerable) %>
+        <%= button_to "Decline", decline_path(request.followerable) %>
+    <% end %>
 
-<body>
+    <br>
+    <h5>Followers</h5>
+    <% current_user.followers.each do |follower| %>
+        <p><b><%= link_to follower.email, follower %></b></p>
+    <% end %>
+
+    <h5>Following</h5>
+    <% current_user.following.each do |following| %>
+        <p><%= link_to following.email, following %></p>
+    <% end %>
+  <% end %>
+<div id="posts" class="text-center">
   <%= stylesheet_link_tag("post")%>
-  <div id="posts" class="text-left" style="margin-left: 20px;">
+  <br>
+  <p style="color: green"><%= notice %></p>
+  <br>
+  <% @posts.each do |post| %>
+    <%= render post %>
     <% if user_signed_in? %>
-      <% current_user.follow_requests.each do |request| %>
-          <%= request.followerable.email %> Wants to follow you
-          <%= button_to "Accept", accept_path(request.followerable) %>
-          <%= button_to "Decline", decline_path(request.followerable) %>
-      <% end %>
-
-      <br>
-      <h5>Followers</h5>
-      <% current_user.followers.each do |follower| %>
-          <p><b><%= link_to follower.email, follower %></b></p>
-      <% end %>
-
-      <h5>Following</h5>
-      <% current_user.following.each do |following| %>
-          <p><%= link_to following.email, following %></p>
-      <% end %>
-    <% end %>
-  <div id="posts" class="text-center">
-    <%= stylesheet_link_tag("post")%>
-    <br>
-    <p style="color: green"><%= notice %></p>
-    <br>
-    <% @posts.each do |post| %>
-      <%= render post %>
-      <% if user_signed_in? %>
-      <div id="<%= dom_id post %>" class="post-container">
-        <% post.comments.last(3).each do |comment| %>
-          <div style="display: flex; align-items: flex-start; margin-right: 350px;">
-            <div>
-              <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
+    <div id="<%= dom_id post %>" class="post-container">
+      <% post.comments.last(3).each do |comment| %>
+        <div style="display: flex; align-items: flex-start; margin-right: 350px;">
+          <div>
+            <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
+          </div>
+        
+          <% if comment.user && current_user.id == comment.user.id %>
+            <div style="display: flex; justify-content: flex-end;">
+              <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
             </div>
-          
-            <% if comment.user && current_user.id == comment.user.id %>
-              <div style="display: flex; justify-content: flex-end;">
-                <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <% if post.comments.count > 3 %>
-          <div style="display: flex; align-items: flex-start; margin-right: 350px;">
-            <p>...</p>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
       <% end %>
-      <br>
-      <br>
-      <br>
+      <% if post.comments.count > 3 %>
+        <div style="display: flex; align-items: flex-start; margin-right: 350px;">
+          <p>...</p>
+        </div>
+      <% end %>
+    </div>
     <% end %>
-  </div>
-</body>
-</html>
+    <br>
+    <br>
+    <br>
+  <% end %>
+</div>
