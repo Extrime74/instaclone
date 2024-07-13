@@ -3,11 +3,10 @@
    border: 2px solid #ddd;
    border-radius: 4px;
    margin: auto;
-   margin-top: 20px;
    width: 600px;
    height: auto;
    position: relative;
-   padding: 20px;
+   padding: 30px;
 }
  .post-link
  {
@@ -24,3 +23,36 @@
  {
     opacity: 0.3;
  }
+
+ .comment-container {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   width: 600px;
+   position: relative;
+   top: 50%;
+   left: 51%;
+   transform: translate(-50%, -50%);
+ }
+
+ .buttons-container {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   width: 600px;
+   position: relative;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.username-container {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   width: 600px;
+   position: relative;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}

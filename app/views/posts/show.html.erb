@@ -4,30 +4,29 @@
   <p style="color: green"><%= notice %></p>
   <br>
   <%= render @post %>
-    <%= link_to "Back to posts", posts_path %>
-    <% if user_signed_in? %>
-      <% if current_user.id == @post.user.id %>
-      <div>
-        <%= link_to "Edit this post", edit_post_path(@post) %>
-        <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-primary" %>
+    <div class= buttons-container>
+      <%= link_to "Back ", posts_path %>
+      <% if user_signed_in? %>
+        <% if current_user.id == @post.user.id %>
+          <div class="ml-2">
+            <%= link_to "Edit", edit_post_path(@post) %>
+          </div>
+          <div class="ml-2">
+            <%= button_to "Delete", @post, method: :delete, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+    </div>
+    <br>
+    <% @post.comments.each do |comment| %>
+      <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+        <div style="text-align: left; flex: 1;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></div>
+        <% if comment.user && current_user.id == comment.user.id %>
+          <div class="delete-button">
+            <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+          </div>
+        <% end %>
       </div>
     <% end %>
-      <br>
-    <div id="buttons" class="post-container">
-      <% @post.comments.each do |comment| %>
-        <div style="display: flex; align-items: flex-start; margin-right: 350px;">
-          <div>
-            <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
-          </div>
-          
-          <% if comment.user && current_user.id == comment.user.id %>
-            <div style="display: flex; justify-content: flex-end;">
-              <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
-            </div>
-          <% end %>
-        </div>
-        <br>
-      <% end %>
     <%= render "comments/form", comment: @comment %>
   <% end %>  
 </div>

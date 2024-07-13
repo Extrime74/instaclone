@@ -23,7 +23,7 @@
           <%= link_to "My Profile", current_user, class: "nav-link"%>
         </li>
         <li class="nav-item">
-          <button class="button-like-link" onclick="window.location.href='<%= destroy_user_session_path %>'">Sign Out</button>
+          <button class="btn btn-primary btn" onclick="window.location.href='<%= destroy_user_session_path %>'">Sign Out</button>
         </li> 
       <% else %>
         <li class="nav-item">

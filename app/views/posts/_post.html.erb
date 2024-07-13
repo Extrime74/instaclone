@@ -1,28 +1,19 @@
-<%= link_to post.user.email, post.user %>
-<div id="<%= dom_id post %>" class="post-container">
-
-  <div style="text-align: left; margin-left: 30px;">
-    
-  </div>
-  </p>
+<br>
+<div class="username-container"> <h5><%= link_to post.user.email, post.user %><h5></div>
+<div class="post-container">
   <%= image_tag(post.image, style: "object-fit: contain; width: 500px; height: 500px;") %>
-  <p>
   <%= link_to "", post, class:"post-link" %>
-  </p>
   <p>
-  <div style="text-align: left; margin-left: 30px;">
-    <%= post.description %>
-  </div>
-  </p>
+  <div style="text-align: left"><%= post.description %></div>
 </div>
-<div id="<%= dom_id post %>" class="like-container" style="display: flex; align-items: center;">
+<div class="like-container" style="display: flex; align-items: center;">
   <span style="margin-right: 10px;">
     <% if user_signed_in? %>
       <% like = current_user.likes.find_by(post: post) %>
     <% if like.nil? %>
-      <%= button_to "♡", likes_path, params: { like: { post_id: post.id } }, method: :post %>
+      <%= button_to "🤍", likes_path, params: { like: { post_id: post.id } }, method: :post, class: "btn btn-primary btn-light" %>
     <% else %>
-      <%= button_to "♥", like_path(like), method: :delete %>
+      <%= button_to "❤️", like_path(like), method: :delete, class: "btn btn-primary btn-light" %>
     <% end %>
   <% end %>
   </span>

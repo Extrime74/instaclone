@@ -1,35 +1,32 @@
-<div id="posts" class="text-center">
+<div class="text-center">
   <%= stylesheet_link_tag("post")%>
   <div>
   <p style="color: green"><%= notice %></p>  
   <div>  
   <h1>Feed</h1>
   <br>
+</div>
 
 <% @posts.each do |post| %>
   <% if user_signed_in? %>
     <% if current_user.following?(post.user) %>
       <%= render post %>
-      <div id="<%= dom_id post %>" class="post-container">
-        <% post.comments.last(3).each do |comment| %>
-          <div style="display: flex; align-items: flex-start; margin-right: 350px;">
-          <div>
-            <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
-          </div>
-            
+      <br>
+      <% post.comments.last(3).each do |comment| %>
+        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+          <div style="text-align: left; flex: 1;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></div>
           <% if comment.user && current_user.id == comment.user.id %>
-            <div style="display: flex; justify-content: flex-end;">
-              <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
+            <div class="delete-button">
+              <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
             </div>
           <% end %>
-          </div>
-        <% end %>
-        <% if post.comments.count > 3 %>
-          <div style="display: flex; align-items: flex-start; margin-right: 350px;">
-            <p>...</p>
-          </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+      <% if post.comments.count > 3 %>
+        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+          <p>...</p>
+        </div>
+      <% end %>
     <% end %>
     <br>
   <% end %>
