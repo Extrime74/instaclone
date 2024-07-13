@@ -4,7 +4,6 @@
   <p style="color: green"><%= notice %></p>
   <br>
   <%= render @post %>
-  <div id="buttons" class="post-container">
     <%= link_to "Back to posts", posts_path %>
     <% if user_signed_in? %>
       <% if current_user.id == @post.user.id %>
@@ -12,23 +11,25 @@
         <%= link_to "Edit this post", edit_post_path(@post) %>
         <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-primary" %>
       </div>
-      <% end %>
+    <% end %>
       <br>
+    <div id="buttons" class="post-container">
       <% @post.comments.each do |comment| %>
         <div style="display: flex; align-items: flex-start; margin-right: 350px;">
           <div>
-            <%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %>
+            <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
           </div>
-      
-          <div style="margin-left: 20px;">
-            <% if comment.user && current_user.id == comment.user.id %>
+          
+          <% if comment.user && current_user.id == comment.user.id %>
+            <div style="display: flex; justify-content: flex-end;">
               <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
         <br>
       <% end %>
-    </div>
     <%= render "comments/form", comment: @comment %>
   <% end %>  
 </div>
+<br>
+<br>

@@ -3,13 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  describe 'GET /show' do
-    let(:user) { create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
 
+  before do
+    sign_in(user)
+  end
+
+  describe 'GET index' do
     it 'returns http success' do
       get "/users/#{user.id}"
-      follow_redirect! # Follow the redirect caused by authentication
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'POST #follow' do
+    it 'отправляет запрос на подписку пользователю' do
+      sign_in user
+      another_user = create(:user)
+      post :follow, params: { id: another_user.id }
+      expect(user.pending_follow_requests_sent_to?(another_user)).to be_truthy
     end
   end
 end

@@ -1,4 +1,15 @@
-<div id="<%= dom_id comment %>" class="post-container">
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function autoResize(textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = (textarea.scrollHeight) + "px";
+    }
+  </script>
+</head>
+
+<body>
   <%= form_with(model: comment) do |form| %>
     <% if comment.errors.any? %>
       <div style="color: red">
@@ -12,7 +23,8 @@
       </div>
     <% end %>
 
-    <%= form.text_field :text, style: "width: 100%;" %>
+    <%= form.text_area :text, style: "width: 100%;", oninput: "autoResize(this)" %>
+    <br>
     <br>
     <%= form.submit %>
 
@@ -21,4 +33,5 @@
 
     <br>
   <% end %>
-</div>
+</body>
+</html>
