@@ -17,7 +17,7 @@
       <% @post.comments.each do |comment| %>
         <div style="display: flex; align-items: flex-start; margin-right: 350px;">
           <div>
-            <%= "#{comment.post.user.email}: #{comment.text}" if comment.text.present? %>
+            <%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %>
           </div>
       
           <div style="margin-left: 20px;">
