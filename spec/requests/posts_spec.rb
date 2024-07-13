@@ -9,6 +9,7 @@ RSpec.describe 'Posts', type: :request do
       image: fixture_file_upload(Rails.root.join('spec', 'pic.jpg'), 'image/jpeg'),
       user_id: user.id }
   end
+  
   let!(:invalid_attributes) { { description: Faker::Lorem.characters(number: 501) } }
 
   before do

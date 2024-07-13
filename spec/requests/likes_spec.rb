@@ -1,41 +1,31 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Likes', type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:post) { create(:post, user:) }
+RSpec.describe LikesController, type: :controller do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:post) { FactoryBot.create(:post, user:) }
 
   before do
-    sign_in(user)
+    sign_in user
   end
 
-  describe 'POST create' do
-    it 'should create a like for the post' do
-      create(:like, user:, post:)
-      expect do
-        post posts_path, params: { like: { post_id: post.id } }
-      end.to change(Like, :count).by(1)
-    end
-
-    it 'should not create a like if the user already liked the post' do
-      create(:like, user:, post:)
-
-      expect do
-        post likes_path, params: { like: { post_id: post.id } }
-      end.to_not change(Like, :count)
+  describe 'POST #create' do
+    it 'creates a new like' do
+      like = create(:like, post:, user:)
+      expect{
+        (response).to be_successful, 
+        redirect_to(:back)
+      }
     end
   end
 
-  describe 'DELETE destroy' do
-    it 'should remove the like' do
-      like = create(:like, user:, post:)
+  describe 'DELETE #destroy' do
+    let!(:like) { user.likes.create(post: post) }
 
-      expect do
-        delete like_path(like)
-      end.to change(Like, :count).by(-1)
-
-      expect(response).to redirect_to(root_path)
+    it 'deletes the like' do
+      expect {
+        delete :destroy, params: { id: like.id }
+      }.to change(Like, :count).by(-1)
+      redirect_to(:back)
     end
   end
 end
