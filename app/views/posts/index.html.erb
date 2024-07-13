@@ -25,6 +25,28 @@
   <br>
   <% @posts.each do |post| %>
     <%= render post %>
+    <% if user_signed_in? %>
+    <div id="<%= dom_id post %>" class="post-container">
+      <% post.comments.last(3).each do |comment| %>
+        <div style="display: flex; align-items: flex-start; margin-right: 350px;">
+          <div>
+            <span style="white-space: nowrap;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></span>
+          </div>
+        
+          <% if comment.user && current_user.id == comment.user.id %>
+            <div style="display: flex; justify-content: flex-end;">
+              <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-primary delete-btn" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <% if post.comments.count > 3 %>
+        <div style="display: flex; align-items: flex-start; margin-right: 350px;">
+          <p>...</p>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
     <br>
     <br>
     <br>

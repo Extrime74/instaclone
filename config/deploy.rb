@@ -1,8 +1,10 @@
-# config valid for current version and patch releases of Capistrano
-lock "~> 3.19.1"
+# frozen_string_literal: true
 
-set :application, "instaclone"
-set :repo_url, "git@github.com:Extrime74/instaclone.git"
+# config valid for current version and patch releases of Capistrano
+lock '~> 3.19.1'
+
+set :application, 'instaclone'
+set :repo_url, 'git@github.com:Extrime74/instaclone.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -27,7 +29,7 @@ set :deploy_to, '/home/deploy/instaclone'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "vendor/javascript", "storage"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'vendor/javascript', 'storage'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

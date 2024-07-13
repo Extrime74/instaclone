@@ -63,12 +63,12 @@ RSpec.describe '/comments', type: :request do
     context 'with valid parameters' do
       it 'creates a new Comment' do
         expect do
-          comment = create(:comment, post:, user:)
+          create(:comment, post:, user:)
         end.to change(Comment, :count).by(1)
       end
 
       it 'redirects to the created comment' do
-        comment = Comment.create! valid_attributes
+        Comment.create! valid_attributes
         expect redirect_to(post_path(post))
       end
     end
