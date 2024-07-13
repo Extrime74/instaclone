@@ -29,36 +29,6 @@ RSpec.describe '/comments', type: :request do
     sign_in(user)
   end
 
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      get '/comments'
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      comment = create(:comment, post:, user:)
-      get comment_url(comment)
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /new' do
-    it 'renders a successful response' do
-      get new_comment_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      comment = create(:comment, post:, user:)
-      get edit_comment_url(comment)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Comment' do

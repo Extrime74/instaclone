@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
-  resources :comments
+  resources :comments, only: %i[create destroy]
 
   devise_for :users
   devise_scope :user do

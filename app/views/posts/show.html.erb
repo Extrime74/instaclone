@@ -2,6 +2,7 @@
   <%= stylesheet_link_tag("post")%>
   <br>
   <p style="color: green"><%= notice %></p>
+  <p style="color: red"><%= alert %></p>
   <br>
   <%= render @post %>
     <div class= buttons-container>
@@ -18,7 +19,7 @@
     </div>
     <br>
     <% @post.comments.each do |comment| %>
-      <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+      <div class="comment-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
         <div style="text-align: left; flex: 1;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></div>
         <% if comment.user && current_user.id == comment.user.id %>
           <div class="delete-button">

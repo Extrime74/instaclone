@@ -1,23 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[show destroy]
 
-  # GET /comments or /comments.json
-  def index
-    @comments = Comment.all
-  end
-
-  # GET /comments/1 or /comments/1.json
-  def show; end
-
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
-
-  # GET /comments/1/edit
-  def edit; end
 
   # POST /comments or /comments.json
   def create
@@ -27,13 +12,11 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to @comment.post, alert: 'Comment cannot be blank or longer than 501 characters.'}
       end
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
-  def update; end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
