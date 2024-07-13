@@ -14,12 +14,12 @@
  *= require_self
  */
  body {
-    min-width: 800px;
+    min-width: 620px;
   }
 
 @media only screen and (max-width: 428px) {
     body {
-        width: 100%; /* Устанавливаем ширину страницы на 100% */
-        max-width: 100%; /* Устанавливаем максимальную ширину */
+        width: 100%;
+        max-width: 100%;
     }
 }
