@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to "Home", root_path, class:"navbar-brand", style: "margin-left: 20px;" %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <%= link_to "All Posts", root_path, class:"navbar-brand", style: "margin-left: 20px;" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -17,10 +17,7 @@
           <%= link_to "Feed", posts_feed_path, class: "nav-link"%>
         </li> 
         <li class="nav-item">
-          <%= link_to "My Posts", posts_myposts_path, class: "nav-link"%>
-        </li> 
-        <li class="nav-item">
-          <%= link_to "My Profile", current_user, class: "nav-link"%>
+          <%= link_to "My Page", current_user, class: "nav-link"%>
         </li>
         <li class="nav-item">
           <button class="btn btn-primary btn" onclick="window.location.href='<%= destroy_user_session_path %>'">Sign Out</button>

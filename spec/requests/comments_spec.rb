@@ -18,10 +18,11 @@ RSpec.describe '/comments', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:post) { FactoryBot.create(:post, user:) }
   let!(:valid_attributes) do
-    { text: Faker::Lorem.characters(number: 500),
-      post_id: post.id,
-      user_id: user.id }
+    { text: Faker::Lorem.characters(number: 250),
+      post:,
+      user: }
   end
+  let(:comment) { Comment.create! valid_attributes }
 
   let!(:invalid_attributes) { { text: Faker::Lorem.characters(number: 501) } }
 

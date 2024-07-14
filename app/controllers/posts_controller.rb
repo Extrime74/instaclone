@@ -15,10 +15,6 @@ class PostsController < ApplicationController
     @comment = @post.comments.build
   end
 
-  def myposts
-    @posts = Post.all.order(created_at: :desc)
-  end
-
   def feed
     @posts = Post.all.order(created_at: :desc)
   end

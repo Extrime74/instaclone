@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   post 'users/:id/cancel', to: 'users#cancel', as: 'cancel'
 
   get 'posts/feed'
-  get 'posts/myposts'
   resources :posts
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

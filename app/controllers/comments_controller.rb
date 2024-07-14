@@ -3,7 +3,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show destroy]
 
-
   # POST /comments or /comments.json
   def create
     @comment = Comment.new(comment_params)
@@ -12,11 +11,10 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
       else
-        format.html { redirect_to @comment.post, alert: 'Comment cannot be blank or longer than 501 characters.'}
+        format.html { redirect_to @comment.post, alert: 'Comment cannot be blank or longer than 501 characters.' }
       end
     end
   end
-
 
   # DELETE /comments/1 or /comments/1.json
   def destroy

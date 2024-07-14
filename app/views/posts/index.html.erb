@@ -1,50 +1,38 @@
-<%= stylesheet_link_tag("post")%>
-<div class="text-left" style="margin-left: 20px;">
-  <% if user_signed_in? %>
-    <% current_user.follow_requests.each do |request| %>
-        <%= request.followerable.email %> Wants to follow you
-        <%= button_to "Accept", accept_path(request.followerable) %>
-        <%= button_to "Decline", decline_path(request.followerable) %>
-    <% end %>
-
-    <br>
-    <h5>Followers</h5>
-    <% current_user.followers.each do |follower| %>
-        <p><b><%= link_to follower.email, follower %></b></p>
-    <% end %>
-
-    <h5>Following</h5>
-    <% current_user.following.each do |following| %>
-        <p><%= link_to following.email, following %></p>
-    <% end %>
-  <% end %>
-</div>
-
 <div class="text-center">
   <%= stylesheet_link_tag("post")%>
-  <br>
+
+  <div>
   <p style="color: green"><%= notice %></p>
+  <p style="color: red"><%= alert %></p>   
+  <div> 
+
+  <h1>All Posts</h1>
   <br>
-  <% @posts.each do |post| %>
-    <%= render post %>
-      <% if user_signed_in? %>
-        <% post.comments.last(3).each do |comment| %>
-          <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
-          <div style="text-align: left; flex: 1;"><%= "#{comment.user.email}: #{comment.text}" if comment.text.present? %></div>
-          <% if comment.user && current_user.id == comment.user.id %>
-            <div class="delete-button">
-              <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
-            </div>
-          <% end %>
-          </div>
-        <% end %>
-        <% if post.comments.count > 3 %>
-          <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
-            <p>...</p>
-          </div>
-        <% end %>
-      <% end %>
-      <br>
-  <% end %>
   <br>
 
+<% @posts.each do |post| %>
+  <%= render post %>
+    <% if user_signed_in? %>
+      <% post.comments.last(3).each do |comment| %>
+        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+        <div style="text-align: left; flex: 1;">
+          <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
+        </div>
+        <% if comment.user && current_user.id == comment.user.id %>
+          <div class="delete-button">
+            <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+          </div>
+        <% end %>
+        </div>
+      <% end %>
+      <% if post.comments.count > 3 %>
+        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+          <p><%= link_to "...", post, class:"custom-link" %></p>
+        </div>
+      <% end %>
+    <% else %>
+        <br>
+    <% end %>
+    <br>
+    <br>
+<% end %>

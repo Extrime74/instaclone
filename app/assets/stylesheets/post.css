@@ -56,3 +56,8 @@
    left: 50%;
    transform: translate(-50%, -50%);
 }
+
+.custom-link {
+   font-size: 22px;
+   color: black;
+}
