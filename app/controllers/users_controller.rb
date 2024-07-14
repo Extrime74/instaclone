@@ -12,12 +12,12 @@ class UsersController < ApplicationController
   def follow
     current_user.send_follow_request_to(@user)
     @user.accept_follow_request_of(current_user)
-    redirect_to users_path(@user)
+    redirect_back(fallback_location: root_path)
   end
 
   def unfollow
     current_user.unfollow(@user)
-    redirect_to users_path(@user)
+    redirect_back(fallback_location: root_path)
   end
 
   def accept
