@@ -19,4 +19,7 @@
   </span>
   <%= "#{post.likes.count} #{'Like'.pluralize(post.likes.count)}" %>
 </div>
-
+<div class="buttons-container" style= "justify-content: flex-start; margin-left: 24px;">
+    <%= "💬⠀⠀#{post.comments.count} #{'Comment'.pluralize(post.comments.count)}" %>
+</div>
+<br>
