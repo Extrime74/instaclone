@@ -1,6 +1,4 @@
 <div class="text-center">
-  <%= stylesheet_link_tag("post")%>
-
   <div>
   <p style="color: green"><%= notice %></p>
   <p style="color: red"><%= alert %></p>   
@@ -14,8 +12,8 @@
   <%= render post %>
     <% if user_signed_in? %>
       <% post.comments.last(3).each do |comment| %>
-        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
-        <div style="text-align: left; flex: 1;">
+      <div class="comment-container">
+        <div class="comment-text">
           <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
         </div>
         <% if comment.user && current_user.id == comment.user.id %>
@@ -23,10 +21,10 @@
             <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
           </div>
         <% end %>
-        </div>
+      </div>
       <% end %>
       <% if post.comments.count > 3 %>
-        <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
+        <div class="comment-container">
           <p><%= link_to "...", post, class:"custom-link" %></p>
         </div>
       <% end %>

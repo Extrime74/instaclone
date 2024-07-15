@@ -1,40 +1,39 @@
 <div class="text-center">
-  <%= stylesheet_link_tag("post")%>
-
   <div>
   <p style="color: green"><%= notice %></p>
   <p style="color: red"><%= alert %></p>
   <div>
 
-  <%= render @post %>
-    <div class= buttons-container>
-      <%= link_to "Back ", posts_path %>
-      <% if user_signed_in? %>
-        <% if current_user.id == @post.user.id %>
-          <div class="ml-2">
-            <%= link_to "Edit", edit_post_path(@post) %>
-          </div>
-          <div class="ml-2">
-            <%= button_to "Delete", @post, method: :delete, class: "btn btn-danger" %>
-          </div>
-        <% end %>
-    </div>
-    <br>
+<%= render @post %>
+<div class= buttons-container>
+  <%= link_to "Back ", posts_path, class: "btn btn-primary" %>
+  <% if user_signed_in? %>
+    <% if current_user.id == @post.user.id %>
+      <div class="ml-2">
+      <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary" %>
 
-    <% @post.comments.each do |comment| %>
-      <div class="comment-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-        <div style="text-align: left; flex: 1;">
-          <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
-        </div>
-        <% if comment.user && current_user.id == comment.user.id %>
-          <div class="delete-button">
-            <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
-          </div>
-        <% end %>
+      </div>
+      <div class="ml-2">
+        <%= button_to "Delete", @post, method: :delete, class: "btn btn-danger" %>
       </div>
     <% end %>
-    <%= render "comments/form", comment: @comment %>
-  <% end %>  
+</div>
+<br>
+
+<% @post.comments.each do |comment| %>
+  <div class="comment-container">
+    <div class="comment-text">
+      <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
+    </div>
+    <% if comment.user && current_user.id == comment.user.id %>
+      <div class="delete-button">
+        <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+<%= render "comments/form", comment: @comment %>
+<% end %>  
 </div>
 <br>
 <br>

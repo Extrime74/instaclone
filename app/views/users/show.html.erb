@@ -1,66 +1,63 @@
 <div class="text-center">
-    <%= stylesheet_link_tag("post")%>
+  <div>
+  <p style="color: green"><%= notice %></p>
+  <p style="color: red"><%= alert %></p> 
+  <div>  
 
-    <div>
-    <p style="color: green"><%= notice %></p>
-    <p style="color: red"><%= alert %></p> 
-    <div>  
-
-    <% if @user.email != current_user.email %>
-        <h1><%= @user.email %></h1>
-            <% if current_user.following?(@user) %>
-                <%= button_to "Unfollow", unfollow_path(@user), class: "btn btn-primary btn-danger" %>
-            <% else %>
-                <%= button_to "Follow", follow_path(@user), class: "btn btn-primary btn-success" %>
-            <% end %>
-    <% else %>  
-        <h1>My Page</h1>
-        <%= current_user.email %>
-        <br>
-        <br>
-    <% end %>
-    <br>
-    
-    <div class="container">
-        <div class="row justify-content-center">
-        <div class="col-5">
-        <h5>Followers</h5>
-        <% @user.followers.each do |follower| %>
-            <p><b><%= link_to follower.email, follower %></b></p>
-        <% end %>
-        </div>
-        <div class="col-5">
-        <h5>Following</h5>
-        <% @user.following.each do |following| %>
-            <p><%= link_to following.email, following %></p>
-        <% end %>
-        </div>
-    </div>
-    <br>
-    
-    <div class="posts">
-      <% @posts.each do |post| %>
-        <%= render post %>
-        <br>
-        <% post.comments.last(3).each do |comment| %>
-            <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
-            <div style="text-align: left; flex: 1;">
-                <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
-            </div>
-              <% if comment.user && current_user.id == comment.user.id %>
-                <div class="delete-button">
-                  <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-          <% if post.comments.count > 3 %>
-            <div class="comment-container" style="display: flex; justify-content: space-between: 20px; align-items: center; margin-bottom: 5px;">
-                <p><%= link_to "...", post, class:"custom-link" %></p>
-            </div>
-          <% end %>
-        <br>
-        <br>
+<% if @user.email != current_user.email %>
+  <h1><%= @user.email %></h1>
+      <% if current_user.following?(@user) %>
+        <%= button_to "Unfollow", unfollow_path(@user), class: "btn btn-primary btn-danger" %>
+      <% else %>
+        <%= button_to "Follow", follow_path(@user), class: "btn btn-primary btn-success" %>
       <% end %>
-    </div>
+<% else %>  
+    <h1>My Page</h1>
+    <%= current_user.email %>
+    <br>
+    <br>
+<% end %>
+<br>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <h5>Followers</h5>
+      <% @user.followers.each do |follower| %>
+          <p><b><%= link_to follower.email, follower %></b></p>
+      <% end %>
+  </div>
+  <div class="col-5">
+    <h5>Following</h5>
+    <% @user.following.each do |following| %>
+        <p><%= link_to following.email, following %></p>
+    <% end %>
+  </div>
+</div>
+<br>
+
+<div class="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <br>
+    <% post.comments.last(3).each do |comment| %>
+      <div class="comment-container">
+        <div class="comment-text">
+          <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present? %>
+        </div>
+        <% if comment.user && current_user.id == comment.user.id %>
+          <div class="delete-button">
+            <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+      <% if post.comments.count > 3 %>
+        <div class="comment-container">
+          <p><%= link_to "...", post, class:"custom-link" %></p>
+        </div>
+      <% end %>
+    <br>
+    <br>
+  <% end %>
 </div>

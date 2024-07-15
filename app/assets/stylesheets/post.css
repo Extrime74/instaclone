@@ -19,6 +19,7 @@
     opacity: 0;
     background-color: rgba(0, 0, 0, 0.2);
  }
+ 
  .post-link:hover
  {
     opacity: 0.3;
@@ -26,14 +27,20 @@
 
  .comment-container {
    display: flex;
-   justify-content: flex-start;
+   justify-content: space-between;
    align-items: center;
    width: 600px;
-   position: relative;
-   top: 50%;
-   left: 51%;
-   transform: translate(-50%, -50%);
- }
+   margin-bottom: 10px;
+   margin-left: auto;
+   margin-right: auto;
+   padding-left: 10px;
+}
+
+ .comment-text {
+   text-align: left; 
+   flex: 1;
+   word-break: break-all;
+}
 
  .buttons-container {
    display: flex;
@@ -44,6 +51,12 @@
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+}
+
+.delete-button {
+   margin-top: -1.2em;
+   margin-left: 5px;
+   
 }
 
 .username-container {
