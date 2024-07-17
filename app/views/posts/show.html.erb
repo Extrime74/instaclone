@@ -20,20 +20,23 @@
 </div>
 <br>
 
-<% @post.comments.each do |comment| %>
-  <div class="comment-container">
-    <div class="comment-text">
-      <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
-    </div>
-    <% if comment.user && current_user.id == comment.user.id %>
-      <div class="delete-button">
-        <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+<%= turbo_frame_tag dom_id(@post, :comment) do %>
+  <% @post.comments.each do |comment| %>
+    <div class="comment-container">
+      <div class="comment-text">
+        <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
       </div>
+      <% if comment.user && current_user.id == comment.user.id %>
+        <div class="delete-button">
+          <%= button_to "🗑️", comment, method: :delete, class: "btn btn-primary btn-light" %>
+        </div>
+      <% end %>
+    </div>
     <% end %>
-  </div>
-  <% end %>
-<%= render "comments/form", comment: @comment %>
-<% end %>  
+      <p style="color: red"><%= alert %></p>
+  <%= render "comments/form", comment: @comment %>
+  <% end %> 
+<% end %> 
 </div>
 <br>
 <br>

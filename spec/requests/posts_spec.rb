@@ -32,6 +32,13 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
+  describe 'GET feed' do
+    it 'should render the feed page' do
+      get posts_feed_path
+      expect(response).to render_template(:feed)
+    end
+  end
+
   describe 'GET new' do
     it 'should render the new page' do
       get new_post_path

@@ -6,22 +6,26 @@
   <p>
   <div style="text-align: left"><%= post.description %></div>
 </div>
-<div class="like-container" style="display: flex; align-items: center;">
-  <span style="margin-right: 10px;">
-    <% if user_signed_in? %>
-      <% like = current_user.likes.find_by(post: post) %>
-      <% if like.nil? %>
-        <%= button_to "🤍", likes_path, params: { like: { post_id: post.id } }, method: :post, class: "btn btn-primary btn-light" %>
-      <% else %>
-        <%= button_to "❤️", like_path(like), method: :delete, class: "btn btn-primary btn-light" %>
+<%= turbo_frame_tag dom_id(post, :like) do %>
+  <div class="like-container" style="display: flex; align-items: center;">
+    <span style="margin-right: 10px;">
+      <% if user_signed_in? %>
+        <% like = current_user.likes.find_by(post: post) %>
+        <% if like.nil? %>
+          <%= button_to "🤍", likes_path, params: { like: { post_id: post.id } }, method: :post, class: "btn btn-primary btn-light" %>
+        <% else %>
+          <%= button_to "❤️", like_path(like), method: :delete, class: "btn btn-primary btn-light" %>
+        <% end %>
+      <% else%>
+      ⠀❤️⠀
       <% end %>
-    <% else%>
-    ⠀❤️⠀
-    <% end %>
-  </span>
-  <%= "#{post.likes.count} #{'Like'.pluralize(post.likes.count)}" %>
-</div>
-<div class="buttons-container" style= "justify-content: flex-start; margin-left: 24px;">
-    <%= "💬⠀⠀#{post.comments.count} #{'Comment'.pluralize(post.comments.count)}" %>
-</div>
+    </span>
+    <%= "#{post.likes.count} #{'Like'.pluralize(post.likes.count)}" %>
+  </div>
+<% end %>
+<%= turbo_frame_tag "post_#{post.id}" do %>
+  <div class="buttons-container" style= "justify-content: flex-start; margin-left: 24px;">
+      <%= "💬⠀⠀#{post.comments.count} #{'Comment'.pluralize(post.comments.count)}" %>
+  </div>
+<% end %>
 <br>

@@ -4,19 +4,21 @@
   <p style="color: red"><%= alert %></p> 
   <div>  
 
-<% if @user.email != current_user.email %>
-  <h1><%= @user.email %></h1>
-      <% if current_user.following?(@user) %>
-        <%= button_to "Unfollow", unfollow_path(@user), class: "btn btn-primary btn-danger" %>
-      <% else %>
-        <%= button_to "Follow", follow_path(@user), class: "btn btn-primary btn-success" %>
-      <% end %>
-<% else %>  
+<turbo-frame id="user_profile">
+  <% if @user.email != current_user.email %>
+    <h1><%= @user.email %></h1>
+    <% if current_user.following?(@user) %>
+      <%= button_to "Unfollow", unfollow_path(@user), class: "btn btn-primary btn-danger", method: :post %>
+    <% else %>
+      <%= button_to "Follow", follow_path(@user), class: "btn btn-primary btn-success", method: :post %>
+    <% end %>
+  <% else %>
     <h1>My Page</h1>
     <%= current_user.email %>
     <br>
     <br>
-<% end %>
+  <% end %>
+</turbo-frame>
 <br>
 
 <div class="container">
