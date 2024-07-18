@@ -24,7 +24,7 @@
   <% @post.comments.each do |comment| %>
     <div class="comment-container">
       <div class="comment-text">
-        <%= "#{link_to(comment.user.email, user_path(comment.user))}: #{comment.text}".html_safe if comment.text.present?%>
+        <%= "#{link_to(comment.user.email, user_path(comment.user), target: '_blank')}: #{comment.text}".html_safe if comment.text.present?%>
       </div>
       <% if comment.user && current_user.id == comment.user.id %>
         <div class="delete-button">
