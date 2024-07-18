@@ -1,0 +1,79 @@
+# goes in /etc/nginx/sites-available/my-app
+# but really it's better to use ssl
+server {
+    server_name instaclone.ru www.instaclone.ru;
+
+    listen 80;
+
+    root /home/deploy/instaclone/current/public;
+
+    passenger_enabled on;
+    passenger_app_env production;
+    passenger_preload_bundler on;
+
+    access_log /var/log/nginx/app.access.log;
+    error_log /var/log/nginx/app.error.log;
+
+    location /cable {
+        passenger_app_group_name instaclone_websocket;
+        passenger_force_max_concurrent_requests_per_process 0;
+    }
+
+    # Allow uploads up to 100MB in size
+    client_body_buffer_size 10K;
+    client_header_buffer_size 1k;
+    client_max_body_size 100m;
+    large_client_header_buffers 4 4k;
+    client_body_timeout 12;
+    client_header_timeout 12;
+    keepalive_timeout 15;
+    send_timeout 10;
+
+    gzip on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 1024;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml applicati>
+
+    location ~ ^/(assets|packs) {
+        expires max;
+        gzip_static on;
+    }
+
+    location ~ /apple-icon.png {
+        return 204;
+        log_not_found off;
+    }
+
+    if (-f $document_root/system/maintenance.html) {
+        return 503;
+    }
+
+    error_page 503 @maintenance;
+    location @maintenance {
+        rewrite ^(.*)$ /system/maintenance.html break;
+    }
+
+    location ~* ^/(?:favicon|apple-touch-icon|android-chrome-|mstile-|safari-pinned-tab.svg|browserconfig.xml>
+        root /home/deploy/instaclone/current/public;
+    }
+
+    location = /browserconfig.xml {
+        root /home/deploy/instaclone/current/public;
+    }
+
+    location = /manifest.json {
+        root /home/deploy/instaclone/current/public;
+    }
+
+    location = /ads.txt {
+        root /home/deploy/instaclone/current/public;
+    }
+}
+
+
+

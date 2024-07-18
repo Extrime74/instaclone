@@ -4,7 +4,10 @@ require 'rails_helper'
 
 RSpec.describe LikesController, type: :controller do
   let!(:user) { FactoryBot.create(:user) }
-  let!(:post) { FactoryBot.create(:post, user:) }
+  let!(:post_new) { FactoryBot.create(:post, user:) }
+  let!(:valid_attributes) do
+    { post_id: post_new.id}
+  end
 
   before do
     sign_in user
@@ -12,7 +15,7 @@ RSpec.describe LikesController, type: :controller do
 
   describe 'POST #create' do
     it 'creates a new like' do
-      create(:like, post:, user:)
+      post likes_path, params: { like: valid_attributes }
       expect do
         response.to be_successful,
                     redirect_to(:back)
@@ -21,7 +24,7 @@ RSpec.describe LikesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like) { user.likes.create(post:) }
+    let!(:like) { user.likes.create(post: post_new) }
 
     it 'deletes the like' do
       expect do
