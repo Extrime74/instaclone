@@ -40,14 +40,20 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
+    @post = Post.find(params[:id])
+  
+    if @post.user == current_user # Check if the post belongs to the current user
+      respond_to do |format|
+        if @post.update(post_params)
+          format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
       end
+    else
+      # Handle unauthorized update attempt
+      redirect_to root_path, alert: "You are not authorized to update this post."
     end
   end
 
